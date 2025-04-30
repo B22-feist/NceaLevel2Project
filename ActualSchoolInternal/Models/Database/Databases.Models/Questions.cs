@@ -4,11 +4,6 @@ namespace ActualSchoolInternal.Models.Database;
 
 public class Questions
 {
-	public Questions()
-	{
-		answers = new HashSet<Answers>();
-	}
-	
 	public int Id { get; set; }
 	
 	public string Operation { get; set; }
@@ -17,5 +12,5 @@ public class Questions
 	
 	public string Location  { get; set; }
 	
-	public ICollection<Answers> answers { get; set; }
+	public Answers answers { get; set; }
 }

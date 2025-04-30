@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="ActualSchoolInternal/App.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
+        <entry key="ActualSchoolInternal/Views/MainWindow.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
