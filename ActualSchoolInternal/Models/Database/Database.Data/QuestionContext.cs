@@ -16,6 +16,8 @@ public class QuestionContext : DbContext
 		
 		string path = Environment.GetFolderPath(folder);
 		DbPath = Path.Combine(path, "ActualSchoolInternal.db");
+		
+		Console.WriteLine("Db path" + DbPath);
 	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,6 +34,21 @@ public class QuestionContext : DbContext
 				.HasForeignKey(q => q.Id)
 				.OnDelete(DeleteBehavior.ClientSetNull)
 				.HasConstraintName("FK_answers");
+			
+			entity.Property(e => e.Operation).IsRequired();
+
+			entity.Property(e => e.Location).IsRequired();
+
+			entity.Property(e => e.Difficulty).IsRequired();
+
+			entity.HasKey(e => e.Id).HasName("ID");
+		});
+
+		modelBuilder.Entity<Answers>(entity =>
+		{
+			entity.Property(e => e.LocationOfFile).IsRequired();
+
+			entity.HasKey(e => e.ID);
 		});
 	}
 }

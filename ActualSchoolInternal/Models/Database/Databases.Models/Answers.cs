@@ -2,7 +2,7 @@
 
 namespace ActualSchoolInternal.Models.Database;
 
-public class Answers
+public partial class Answers
 {
 	public int ID { get; set; }
 	
@@ -10,5 +10,5 @@ public class Answers
 	
 	public string TutorialUrl { get; set; }
 	
-	public Questions Questions { get; set; }
+	public ICollection<Questions> Questions { get; set; }
 }

@@ -2,7 +2,7 @@
 
 namespace ActualSchoolInternal.Models.Database;
 
-public class Questions
+public partial class Questions
 {
 	public int Id { get; set; }
 	
