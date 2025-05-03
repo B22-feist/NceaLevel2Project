@@ -16,8 +16,6 @@ public class QuestionContext : DbContext
 		
 		string path = Environment.GetFolderPath(folder);
 		DbPath = Path.Combine(path, "ActualSchoolInternal.db");
-		
-		Console.WriteLine("Db path" + DbPath);
 	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -48,7 +46,7 @@ public class QuestionContext : DbContext
 		{
 			entity.Property(e => e.LocationOfFile).IsRequired();
 
-			entity.HasKey(e => e.ID);
+			entity.HasKey(e => e.Id);
 		});
 	}
 }

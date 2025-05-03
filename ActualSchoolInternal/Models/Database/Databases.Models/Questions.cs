@@ -12,5 +12,7 @@ public partial class Questions
 	
 	public string Location  { get; set; }
 	
-	public Answers answers { get; set; }
+	public required string Name { get; set; }
+	
+	public required Answers answers { get; set; }
 }

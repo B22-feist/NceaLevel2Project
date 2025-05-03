@@ -4,11 +4,13 @@ namespace ActualSchoolInternal.Models.Database;
 
 public partial class Answers
 {
-	public int ID { get; set; }
+	public int Id { get; set; }
 	
-	public string LocationOfFile { get; set; }
+	public required string LocationOfFile { get; set; }
 	
 	public string TutorialUrl { get; set; }
 	
-	public ICollection<Questions> Questions { get; set; }
+	public required string Name { get; set; }
+	
+	public required ICollection<Questions> Questions { get; set; }
 }
