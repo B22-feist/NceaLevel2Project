@@ -1,20 +1,38 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:ActualSchoolInternal.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:ActualSchoolInternal.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:CompileBindings="True"
         x:Class="ActualSchoolInternal.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
+        x:DataType="viewModels:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="ActualSchoolInternal">
+        Title="SchoolInternal">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <viewModels:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    <StackPanel>
+        <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto" Name="WindowGrid" >
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Settings" HorizontalAlignment="Left"/>
+           
+            <Grid Row="0" Column="0" Name="QuestionsAddRemoveGrid" ColumnDefinitions="*" RowDefinitions="*,*" HorizontalAlignment="Right">
+                
+                <Image Grid.Row="0" Grid.Column="0" Source="../Assets/MathsPaperImages/2021Paper/One a i 2021.png" Height="200" Width="500"/>
+                
+                <Grid Row="1" Column="0" ColumnDefinitions="*,*" RowDefinitions="*" Name="AddRemoveGrid">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Add Question"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Remove Question"/>
+                </Grid>
+                
+            </Grid>
+        </Grid>
+            
+    </StackPanel>
+    
+    
 </Window>

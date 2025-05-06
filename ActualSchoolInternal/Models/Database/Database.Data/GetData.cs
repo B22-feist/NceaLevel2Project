@@ -8,28 +8,29 @@ public class GetData
 	{
 		using QuestionContext context = new();
 
-		IQueryable<Questions> databaseOutput = null;
+		IQueryable<Questions>? databaseOutput = null;
 		switch (difficultly)
 		{
 			case null when operation == null:
 				databaseOutput = context.Questions;
 				break;
 			case null:
-				databaseOutput = context.Questions
-					.Where(o => o.Operation == operation);
+				if (context.Questions != null) databaseOutput = context.Questions
+						.Where(o => o.Operation == operation);
 				break;
 			default:
 			{
 				if (operation == null)
 				{
-					databaseOutput = context.Questions
-						.Where(o => o.Difficulty == difficultly);
+					if (context.Questions != null) databaseOutput = context.Questions
+							.Where(o => o.Difficulty == difficultly);
 				}
 
 				else if (operation != null && difficultly != null)
 				{
-					databaseOutput = context.Questions
-						.Where(o => o.Difficulty == difficultly && o.Operation == operation);
+					if (context.Questions != null)
+						databaseOutput = context.Questions
+							.Where(o => o.Difficulty == difficultly && o.Operation == operation);
 				}
 
 				break;

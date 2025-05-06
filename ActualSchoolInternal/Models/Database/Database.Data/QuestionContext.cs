@@ -4,7 +4,7 @@ namespace ActualSchoolInternal.Models.Database.Database.Data;
 
 public class QuestionContext : DbContext
 {
-	public virtual DbSet<Questions> Questions { get; set; }
+	public virtual DbSet<Questions>? Questions { get; set; }
 	
 	public virtual DbSet<Answers> Answers { get; set; }
 	
