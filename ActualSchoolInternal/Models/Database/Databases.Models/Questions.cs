@@ -12,7 +12,9 @@ public partial class Questions
 	
 	public string Location  { get; set; }
 	
+	public string TypeOfQuestion { get; set; }
+	
 	public required string Name { get; set; }
 	
-	public required Answers answers { get; set; }
+	public required ICollection<Answers> answers { get; set; }
 }

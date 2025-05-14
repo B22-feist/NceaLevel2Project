@@ -2,5 +2,5 @@
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-	public ReactiveViewModel ReactiveViewModel { get; } = new ReactiveViewModel();
+	public ReactiveViewModel ReactiveViewModel { get; } = new();
 }

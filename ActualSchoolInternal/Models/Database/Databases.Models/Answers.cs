@@ -12,5 +12,5 @@ public partial class Answers
 	
 	public required string Name { get; set; }
 	
-	public required ICollection<Questions> Questions { get; set; }
+	public required Questions Questions { get; set; }
 }

@@ -5,6 +5,7 @@
       <map>
         <entry key="ActualSchoolInternal/App.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
         <entry key="ActualSchoolInternal/Views/MainWindow.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
+        <entry key="ActualSchoolInternal/Views/Testing.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
       </map>
     </option>
   </component>

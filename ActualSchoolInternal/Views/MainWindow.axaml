@@ -16,23 +16,55 @@
         <viewModels:MainWindowViewModel/>
     </Design.DataContext>
 
-    <StackPanel>
+    <StackPanel DataContext="{Binding ReactiveViewModel}" >
+        <!--Grid of entire application-->
         <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto" Name="WindowGrid" >
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Settings" HorizontalAlignment="Left"/>
-           
-            <Grid Row="0" Column="0" Name="QuestionsAddRemoveGrid" ColumnDefinitions="*" RowDefinitions="*,*" HorizontalAlignment="Right">
+            <Border Grid.Column="0" Grid.Row="0" BorderThickness="1" >
+                <TextBlock Text="Welcome to Bruno's Questions" HorizontalAlignment="Left" />
+            </Border>
+            
+            <!--Grid of Question options-->
+            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*" Grid.Column="0">
+                <Button Grid.Column="0" Grid.Row="0" Content="Generate new question"/>
+                <Button Grid.Column="1" Grid.Row="0" Content="Display answer"/>
                 
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" BorderThickness="1" />
+                    <RadioButton GroupName="TypeOfQuestion" Content="Exponential" Margin="10" Background="LightGray"/>
+                    <RadioButton GroupName="TypeOfQuestion" Content="Quadratic" BorderThickness="1" />
+                    <RadioButton GroupName="TypeOfQuestion" Content="Linear" BorderThickness="1"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="2" Grid.Column="1">
+                    <RadioButton GroupName="QuestionDifficultly" Content="Excellence" BorderThickness="1" BorderBrush="Black"/>
+                    <RadioButton GroupName="QuestionDifficultly" Content="Merit" BorderThickness="1" BorderBrush="Black" />
+                    <RadioButton GroupName="QuestionDifficultly" Content="Achieved" BorderThickness="1" BorderBrush="Black"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <RadioButton GroupName="OperationOfQuestion" Content="Simplify" BorderThickness="1"  BorderBrush="Black"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Expand" BorderThickness="1" BorderBrush="Black"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Factorise" BorderThickness="1" BorderBrush="Black"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Solve" BorderThickness="1" BorderBrush="Black"/>
+                </StackPanel>
+                
+                <Border  Grid.Column="1" Grid.Row="2" BorderThickness="3">
+                    <TextBlock Name="TutorialLink" Text="Currently Being worked on" />
+                </Border>
+            </Grid>
+           
+            
+            <!--Grid of Question display box, add question and remove question box grid-->
+            <Grid Row="0" Column="0" Name="QuestionsAddRemoveGrid" ColumnDefinitions="*" RowDefinitions="*,*" HorizontalAlignment="Right">
                 <Image Grid.Row="0" Grid.Column="0" Source="../Assets/MathsPaperImages/2021Paper/One a i 2021.png" Height="200" Width="500"/>
                 
+                <!-- Grid of question remove/add boxes-->
                 <Grid Row="1" Column="0" ColumnDefinitions="*,*" RowDefinitions="*" Name="AddRemoveGrid">
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Add Question"/>
                     <TextBlock Grid.Column="1" Grid.Row="0" Text="Remove Question"/>
                 </Grid>
-                
             </Grid>
         </Grid>
             
     </StackPanel>
-    
-    
 </Window>

@@ -37,14 +37,14 @@ public class GetData
 			}
 		}
 		
-		List<Bitmap> output = new();
+		List<Bitmap> output = [];
 
-		string PathToFolder = GetFolderPath.FolderPath();
+		string pathToFolder = GetFolderPath.FolderPath();
 
 		if (databaseOutput == null) return output;
-		foreach (Questions Bitmap in databaseOutput)
+		foreach (Questions bitmap in databaseOutput)
 		{
-			output.Add(new Bitmap(PathToFolder+Bitmap.Location));
+			output.Add(new Bitmap(pathToFolder+bitmap.Location));
 		}
 
 		return output;

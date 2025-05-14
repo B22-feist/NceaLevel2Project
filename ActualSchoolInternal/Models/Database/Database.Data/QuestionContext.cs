@@ -27,11 +27,7 @@ public class QuestionContext : DbContext
 	{
 		modelBuilder.Entity<Questions>(entity =>
 		{
-			entity.HasOne(q => q.answers)
-				.WithMany(a => a.Questions)
-				.HasForeignKey(q => q.Id)
-				.OnDelete(DeleteBehavior.ClientSetNull)
-				.HasConstraintName("FK_answers");
+			
 			
 			entity.Property(e => e.Operation).IsRequired();
 
@@ -47,6 +43,12 @@ public class QuestionContext : DbContext
 			entity.Property(e => e.LocationOfFile).IsRequired();
 
 			entity.HasKey(e => e.Id);
+			
+			entity.HasOne(q => q.Questions)
+				.WithMany(a => a.answers)
+				.HasForeignKey(q => q.Id)
+				.OnDelete(DeleteBehavior.ClientSetNull)
+				.HasConstraintName("FK_answers");
 		});
 	}
 }
