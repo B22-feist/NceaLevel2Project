@@ -17,52 +17,70 @@
     </Design.DataContext>
 
     <StackPanel DataContext="{Binding ReactiveViewModel}" >
+        
+        <StackPanel.Styles>
+            <Style Selector="RadioButton.RadioButtonBorderBlack">
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Background" Value="LightGray"/>
+            </Style>
+        </StackPanel.Styles>
+        
         <!--Grid of entire application-->
-        <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto" Name="WindowGrid" >
-            <Border Grid.Column="0" Grid.Row="0" BorderThickness="1" >
+        <Grid ColumnDefinitions="*, *" RowDefinitions="*" Name="WindowGrid" >
+            <Border Grid.Column="0" Grid.Row="0" BorderThickness="1"  Padding="1" BorderBrush="Black">
                 <TextBlock Text="Welcome to Bruno's Questions" HorizontalAlignment="Left" />
             </Border>
             
             <!--Grid of Question options-->
             <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*" Grid.Column="0">
-                <Button Grid.Column="0" Grid.Row="0" Content="Generate new question"/>
-                <Button Grid.Column="1" Grid.Row="0" Content="Display answer"/>
+                <Button Grid.Column="0" Grid.Row="0" Content="Generate new question" Padding="10"/>
+                <Button Grid.Column="1" Grid.Row="0" Content="Display answer" Padding="10"/>
                 
-                <StackPanel Grid.Row="0" Grid.Column="0">
-                    <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" BorderThickness="1" />
-                    <RadioButton GroupName="TypeOfQuestion" Content="Exponential" Margin="10" Background="LightGray"/>
-                    <RadioButton GroupName="TypeOfQuestion" Content="Quadratic" BorderThickness="1" />
-                    <RadioButton GroupName="TypeOfQuestion" Content="Linear" BorderThickness="1"/>
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+                    <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="TypeOfQuestion" Content="Exponential"  Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="TypeOfQuestion" Content="Quadratic" Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="TypeOfQuestion" Content="Linear" Classes="RadioButtonBorderBlack"/>
                 </StackPanel>
                 
-                <StackPanel Grid.Row="2" Grid.Column="1">
-                    <RadioButton GroupName="QuestionDifficultly" Content="Excellence" BorderThickness="1" BorderBrush="Black"/>
-                    <RadioButton GroupName="QuestionDifficultly" Content="Merit" BorderThickness="1" BorderBrush="Black" />
-                    <RadioButton GroupName="QuestionDifficultly" Content="Achieved" BorderThickness="1" BorderBrush="Black"/>
+                <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
+                    <RadioButton GroupName="QuestionDifficultly" Content="Excellence" Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="QuestionDifficultly" Content="Merit" Classes="RadioButtonBorderBlack" />
+                    <RadioButton GroupName="QuestionDifficultly" Content="Achieved" Classes="RadioButtonBorderBlack"/>
                 </StackPanel>
                 
-                <StackPanel Grid.Row="1" Grid.Column="1">
-                    <RadioButton GroupName="OperationOfQuestion" Content="Simplify" BorderThickness="1"  BorderBrush="Black"/>
-                    <RadioButton GroupName="OperationOfQuestion" Content="Expand" BorderThickness="1" BorderBrush="Black"/>
-                    <RadioButton GroupName="OperationOfQuestion" Content="Factorise" BorderThickness="1" BorderBrush="Black"/>
-                    <RadioButton GroupName="OperationOfQuestion" Content="Solve" BorderThickness="1" BorderBrush="Black"/>
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+                    <RadioButton GroupName="OperationOfQuestion" Content="Simplify" Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Expand" Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Factorise" Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Solve" Classes="RadioButtonBorderBlack"/>
                 </StackPanel>
                 
-                <Border  Grid.Column="1" Grid.Row="2" BorderThickness="3">
+                <Border  Grid.Column="1" Grid.Row="2" BorderThickness="3" Margin="10">
                     <TextBlock Name="TutorialLink" Text="Currently Being worked on" />
                 </Border>
             </Grid>
            
             
             <!--Grid of Question display box, add question and remove question box grid-->
-            <Grid Row="0" Column="0" Name="QuestionsAddRemoveGrid" ColumnDefinitions="*" RowDefinitions="*,*" HorizontalAlignment="Right">
-                <Image Grid.Row="0" Grid.Column="0" Source="../Assets/MathsPaperImages/2021Paper/One a i 2021.png" Height="200" Width="500"/>
+            <Grid Row="0" Column="1" Name="QuestionsAddRemoveGrid" ColumnDefinitions="*" RowDefinitions="*,*" HorizontalAlignment="Right">
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+                    <Image  Source="../Assets/MathsPaperImages/2021Paper/One a i 2021.png" Height="200" Width="500"/>
+                </Border>
                 
                 <!-- Grid of question remove/add boxes-->
+              
                 <Grid Row="1" Column="0" ColumnDefinitions="*,*" RowDefinitions="*" Name="AddRemoveGrid">
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Add Question"/>
-                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Remove Question"/>
+                    <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black">
+                        <TextBlock  Text="Add Question" />
+                    </Border>
+                    
+                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+                        <TextBlock  Text="Remove Question"/>
+                    </Border>
                 </Grid>
+                
             </Grid>
         </Grid>
             
