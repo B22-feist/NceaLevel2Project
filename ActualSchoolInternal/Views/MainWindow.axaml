@@ -34,27 +34,27 @@
             
             <!--Grid of Question options-->
             <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*" Grid.Column="0">
-                <Button Grid.Column="0" Grid.Row="0" Content="Generate new question" Padding="10"/>
+                <Button Grid.Column="0" Grid.Row="0" Content="Generate new question" Padding="10" Click="GenerateQuestionButton"/>
                 <Button Grid.Column="1" Grid.Row="0" Content="Display answer" Padding="10"/>
                 
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
-                    <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" Classes="RadioButtonBorderBlack"/>
-                    <RadioButton GroupName="TypeOfQuestion" Content="Exponential"  Classes="RadioButtonBorderBlack"/>
-                    <RadioButton GroupName="TypeOfQuestion" Content="Quadratic" Classes="RadioButtonBorderBlack"/>
-                    <RadioButton GroupName="TypeOfQuestion" Content="Linear" Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Logarithm}"/>
+                    <RadioButton GroupName="TypeOfQuestion" Content="Exponential"  Classes="RadioButtonBorderBlack" IsChecked="{Binding  Exponential}"/>
+                    <RadioButton GroupName="TypeOfQuestion" Content="Quadratic" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Quadratic}"/>
+                    <RadioButton GroupName="TypeOfQuestion" Content="Linear" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Linear}"/>
                 </StackPanel>
                 
                 <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
-                    <RadioButton GroupName="QuestionDifficultly" Content="Excellence" Classes="RadioButtonBorderBlack"/>
-                    <RadioButton GroupName="QuestionDifficultly" Content="Merit" Classes="RadioButtonBorderBlack" />
-                    <RadioButton GroupName="QuestionDifficultly" Content="Achieved" Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="QuestionDifficultly" Content="Excellence" Classes="RadioButtonBorderBlack" IsChecked="{Binding Excellence}"/>
+                    <RadioButton GroupName="QuestionDifficultly" Content="Merit" Classes="RadioButtonBorderBlack" IsChecked="{Binding Merit}"/>
+                    <RadioButton GroupName="QuestionDifficultly" Content="Achieved" Classes="RadioButtonBorderBlack" IsChecked="{Binding Achieved}"/>
                 </StackPanel>
                 
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
-                    <RadioButton GroupName="OperationOfQuestion" Content="Simplify" Classes="RadioButtonBorderBlack"/>
-                    <RadioButton GroupName="OperationOfQuestion" Content="Expand" Classes="RadioButtonBorderBlack"/>
-                    <RadioButton GroupName="OperationOfQuestion" Content="Factorise" Classes="RadioButtonBorderBlack"/>
-                    <RadioButton GroupName="OperationOfQuestion" Content="Solve" Classes="RadioButtonBorderBlack"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Simplify" Classes="RadioButtonBorderBlack" IsChecked="{Binding Simplify}"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Expand" Classes="RadioButtonBorderBlack" IsChecked="{Binding Expand}"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Factorise" Classes="RadioButtonBorderBlack" IsChecked="{Binding Factorise}"/>
+                    <RadioButton GroupName="OperationOfQuestion" Content="Solve" Classes="RadioButtonBorderBlack" IsChecked="{Binding Solve}"/>
                 </StackPanel>
                 
                 <Border  Grid.Column="1" Grid.Row="2" BorderThickness="3" Margin="10">
@@ -66,7 +66,7 @@
             <!--Grid of Question display box, add question and remove question box grid-->
             <Grid Row="0" Column="1" Name="QuestionsAddRemoveGrid" ColumnDefinitions="*" RowDefinitions="*,*" HorizontalAlignment="Right">
                 <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-                    <Image  Source="../Assets/MathsPaperImages/2021Paper/One a i 2021.png" Height="200" Width="500"/>
+                    <Image  Source="{Binding CurrentQuestion}" Height="200" Width="500"/>
                 </Border>
                 
                 <!-- Grid of question remove/add boxes-->

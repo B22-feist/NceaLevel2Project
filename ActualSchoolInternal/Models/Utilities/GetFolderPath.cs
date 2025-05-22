@@ -1,6 +1,6 @@
-﻿namespace ActualSchoolInternal;
+﻿namespace ActualSchoolInternal.Models.Utilities;
 
-public class GetFolderPath
+public static class GetFolderPath
 {
 	public static string FolderPath()
 	{

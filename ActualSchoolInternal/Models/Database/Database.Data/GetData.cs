@@ -1,52 +1,95 @@
-﻿using Avalonia.Media.Imaging;
+﻿using ActualSchoolInternal.Models.Utilities;
+using Avalonia.Media.Imaging;
 
 namespace ActualSchoolInternal.Models.Database.Database.Data;
 
 public class GetData
 {
-	public List<Bitmap> DataBaseOutput(string? difficultly, string? operation)
+	public Bitmap? DataBaseOutput(string? difficultly, string? operation, string? typeOfQuestion)
 	{
 		using QuestionContext context = new();
 
 		IQueryable<Questions>? databaseOutput = null;
+
 		switch (difficultly)
 		{
-			case null when operation == null:
+			case null when typeOfQuestion == null && operation == null:
+				
 				databaseOutput = context.Questions;
 				break;
-			case null:
-				if (context.Questions != null) databaseOutput = context.Questions
-						.Where(o => o.Operation == operation);
+			case null when typeOfQuestion == null && operation != null:
+
+				if (context.Questions != null)
+					databaseOutput = context.Questions
+						.Where(q => q.Operation == operation);
+				break;
+			case null when typeOfQuestion != null && operation == null:
+				
+				if (context.Questions != null)
+					databaseOutput = context.Questions
+						.Where(q => q.TypeOfQuestion == typeOfQuestion);
 				break;
 			default:
 			{
-				if (operation == null)
-				{
-					if (context.Questions != null) databaseOutput = context.Questions
-							.Where(o => o.Difficulty == difficultly);
-				}
-
-				else if (operation != null && difficultly != null)
+				if (difficultly != null && typeOfQuestion == null && operation == null)
 				{
 					if (context.Questions != null)
 						databaseOutput = context.Questions
-							.Where(o => o.Difficulty == difficultly && o.Operation == operation);
+							.Where(q => q.Difficulty == difficultly);
+				}
+		
+				else if (difficultly == null && typeOfQuestion != null && operation != null)
+				{
+					if (context.Questions != null)
+						databaseOutput = context.Questions
+							.Where(q => q.TypeOfQuestion == typeOfQuestion)
+							.Where(q => q.Operation == operation);
+				}
+		
+				else if (difficultly != null && typeOfQuestion == null && operation != null)
+				{
+					if (context.Questions != null)
+						databaseOutput = context.Questions
+							.Where(q => q.Difficulty == typeOfQuestion)
+							.Where(q => q.Operation == operation);
+				}
+
+				else if (difficultly != null & typeOfQuestion != null && operation == null)
+				{
+					if (context.Questions != null)
+						databaseOutput = context.Questions
+							.Where(q => q.TypeOfQuestion == typeOfQuestion)
+							.Where(q => q.Operation == difficultly);
+				}
+
+				else if (difficultly != null & typeOfQuestion != null && operation != null)
+				{
+					if (context.Questions != null)
+						databaseOutput = context.Questions
+							.Where(q => q.TypeOfQuestion == typeOfQuestion)
+							.Where(q => q.Operation == operation)
+							.Where(q => q.Difficulty == difficultly);
 				}
 
 				break;
 			}
 		}
-		
-		List<Bitmap> output = [];
+	
+
+		List<Bitmap?> possibleAnswer = [];
 
 		string pathToFolder = GetFolderPath.FolderPath();
 
-		if (databaseOutput == null) return output;
+		if (databaseOutput == null) return new Bitmap("ActualSchoolInternal/Assets/BlankScreen.png");
 		foreach (Questions bitmap in databaseOutput)
 		{
-			output.Add(new Bitmap(pathToFolder+bitmap.Location));
+			possibleAnswer.Add(new Bitmap(pathToFolder+bitmap.Location));
 		}
 
-		return output;
+		Random generateBitmap = new();
+		
+		Bitmap? outPut = possibleAnswer[generateBitmap.Next(0,possibleAnswer.Count-1)];
+
+		return outPut;
 	}
 }

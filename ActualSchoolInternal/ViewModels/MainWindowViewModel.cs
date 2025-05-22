@@ -1,4 +1,6 @@
-﻿namespace ActualSchoolInternal.ViewModels;
+﻿using ReactiveUI;
+
+namespace ActualSchoolInternal.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
