@@ -28,14 +28,9 @@
         
         <!--Grid of entire application-->
         <Grid ColumnDefinitions="*, *" RowDefinitions="*" Name="WindowGrid" >
-            <Border Grid.Column="0" Grid.Row="0" BorderThickness="1"  Padding="1" BorderBrush="Black">
-                <TextBlock Text="Welcome to Bruno's Questions" HorizontalAlignment="Left" />
-            </Border>
             
             <!--Grid of Question options-->
             <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*" Grid.Column="0">
-                <Button Grid.Column="0" Grid.Row="0" Content="Generate new question" Padding="10" Click="GenerateQuestionButton"/>
-                <Button Grid.Column="1" Grid.Row="0" Content="Display answer" Padding="10"/>
                 
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
                     <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Logarithm}"/>
@@ -58,7 +53,7 @@
                 </StackPanel>
                 
                 <Border  Grid.Column="1" Grid.Row="2" BorderThickness="3" Margin="10">
-                    <TextBlock Name="TutorialLink" Text="Currently Being worked on" />
+                    <TextBlock Name="TutorialLink" Text="{Binding TutorialUrl}" />
                 </Border>
             </Grid>
            
@@ -66,18 +61,18 @@
             <!--Grid of Question display box, add question and remove question box grid-->
             <Grid Row="0" Column="1" Name="QuestionsAddRemoveGrid" ColumnDefinitions="*" RowDefinitions="*,*" HorizontalAlignment="Right">
                 <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-                    <Image  Source="{Binding CurrentQuestion}" Height="200" Width="500"/>
+                    <Image  Name="QuestionDisplay" Source="{Binding CurrentQuestion}" Height="200" Width="500"/>
                 </Border>
                 
                 <!-- Grid of question remove/add boxes-->
               
                 <Grid Row="1" Column="0" ColumnDefinitions="*,*" RowDefinitions="*" Name="AddRemoveGrid">
                     <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black">
-                        <TextBlock  Text="Add Question" />
+                        <Button Content="Generate new question" Padding="10" Command="{Binding QuestionGenerateCommand}"/>
                     </Border>
                     
                     <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
-                        <TextBlock  Text="Remove Question"/>
+                        <Button Content="Display answer" Padding="10"/>
                     </Border>
                 </Grid>
                 

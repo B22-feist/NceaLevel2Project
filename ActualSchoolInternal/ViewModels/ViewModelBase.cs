@@ -4,5 +4,4 @@ namespace ActualSchoolInternal.ViewModels;
 
 public class ViewModelBase: ObservableObject
 {
-	
 }

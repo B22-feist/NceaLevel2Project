@@ -1,4 +1,5 @@
-﻿using ActualSchoolInternal.Models.Database.Database.Data;
+﻿using System.Reactive;
+using ActualSchoolInternal.Models.Database.Database.Data;
 using ActualSchoolInternal.Models.Utilities;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
@@ -18,6 +19,14 @@ public class ReactiveViewModel : ReactiveObject
 		set => this.RaiseAndSetIfChanged(ref _currentQuestion, value );
 	}
 
+	private string? _tutorialUrl;
+	public string? TutorialUrl
+	{
+		get => _tutorialUrl;
+		
+		set => this.RaiseAndSetIfChanged(ref _tutorialUrl, value);
+	}
+
 	public bool Logarithm { get; set; }
 	public bool Exponential { get; set; }
 	public bool Quadratic { get; set; }
@@ -33,16 +42,17 @@ public class ReactiveViewModel : ReactiveObject
 	public bool Factorise { get; set; }
 	public bool Solve { get; set; }
 
-	public int GenerateQuestion { get; set; }
-
 	public ReactiveViewModel()
 	{
-		this.WhenAnyValue(x => GenerateQuestion)
-			.Subscribe(_ =>
-			{
-				CurrentQuestion = _checkQuestion.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficutly(Achieved, Merit, Excellence),
-					QuestionGeneratorSettings.Operation(Logarithm, Exponential, Quadratic, Linear),
-					QuestionGeneratorSettings.TypeOfQuestion(Simplify, Expand, Factorise, Solve));
-			});
+		QuestionGenerateCommand = ReactiveCommand.Create(QuestionGenerator);
+	}
+	
+	public ReactiveCommand<Unit, Unit> QuestionGenerateCommand { get; }
+
+	private void QuestionGenerator()
+	{
+		CurrentQuestion = _checkQuestion.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficutly(Achieved, Merit, Excellence),
+			QuestionGeneratorSettings.Operation(Logarithm, Exponential, Quadratic, Linear),
+			QuestionGeneratorSettings.TypeOfQuestion(Simplify, Expand, Factorise, Solve), _currentQuestion);
 	}
 }

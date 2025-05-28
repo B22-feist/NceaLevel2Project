@@ -5,25 +5,25 @@ namespace ActualSchoolInternal.Models.Database.Database.Data;
 
 public class GetData
 {
-	public Bitmap? DataBaseOutput(string? difficultly, string? operation, string? typeOfQuestion)
+	public Bitmap? DataBaseOutput(string? difficultly, string? operation, string? typeOfQuestion, Bitmap? currentQuestion)
 	{
 		using QuestionContext context = new();
 
 		IQueryable<Questions>? databaseOutput = null;
 
-		switch (difficultly)
+		 switch (difficultly)
 		{
-			case null when typeOfQuestion == null && operation == null:
+			case "" when typeOfQuestion == "" && operation == "":
 				
 				databaseOutput = context.Questions;
 				break;
-			case null when typeOfQuestion == null && operation != null:
+			case "" when typeOfQuestion == "" && operation != "":
 
 				if (context.Questions != null)
 					databaseOutput = context.Questions
 						.Where(q => q.Operation == operation);
 				break;
-			case null when typeOfQuestion != null && operation == null:
+			case "" when typeOfQuestion != "" && operation == "":
 				
 				if (context.Questions != null)
 					databaseOutput = context.Questions
@@ -31,14 +31,14 @@ public class GetData
 				break;
 			default:
 			{
-				if (difficultly != null && typeOfQuestion == null && operation == null)
+				if (difficultly != "" && typeOfQuestion == "" && operation == "")
 				{
 					if (context.Questions != null)
 						databaseOutput = context.Questions
 							.Where(q => q.Difficulty == difficultly);
 				}
 		
-				else if (difficultly == null && typeOfQuestion != null && operation != null)
+				else if (difficultly == "" && typeOfQuestion != "" && operation != "")
 				{
 					if (context.Questions != null)
 						databaseOutput = context.Questions
@@ -46,7 +46,7 @@ public class GetData
 							.Where(q => q.Operation == operation);
 				}
 		
-				else if (difficultly != null && typeOfQuestion == null && operation != null)
+				else if (difficultly != "" && typeOfQuestion == "" && operation != "")
 				{
 					if (context.Questions != null)
 						databaseOutput = context.Questions
@@ -54,21 +54,25 @@ public class GetData
 							.Where(q => q.Operation == operation);
 				}
 
-				else if (difficultly != null & typeOfQuestion != null && operation == null)
+				else switch (difficultly != "" && typeOfQuestion != "")
 				{
-					if (context.Questions != null)
-						databaseOutput = context.Questions
-							.Where(q => q.TypeOfQuestion == typeOfQuestion)
-							.Where(q => q.Operation == difficultly);
-				}
-
-				else if (difficultly != null & typeOfQuestion != null && operation != null)
-				{
-					if (context.Questions != null)
-						databaseOutput = context.Questions
-							.Where(q => q.TypeOfQuestion == typeOfQuestion)
-							.Where(q => q.Operation == operation)
-							.Where(q => q.Difficulty == difficultly);
+					case true when operation == "":
+					{
+						if (context.Questions != null)
+							databaseOutput = context.Questions
+								.Where(q => q.TypeOfQuestion == typeOfQuestion)
+								.Where(q => q.Operation == difficultly);
+						break;
+					}
+					case true when true:
+					{
+						if (context.Questions != null)
+							databaseOutput = context.Questions
+								.Where(q => q.Operation == typeOfQuestion)
+								.Where(q => q.TypeOfQuestion == operation)
+								.Where(q => q.Difficulty == difficultly);
+						break;
+					}
 				}
 
 				break;
@@ -78,18 +82,40 @@ public class GetData
 
 		List<Bitmap?> possibleAnswer = [];
 
-		string pathToFolder = GetFolderPath.FolderPath();
+		string? pathToFolder = GetFolderPath.FolderPath();
 
-		if (databaseOutput == null) return new Bitmap("ActualSchoolInternal/Assets/BlankScreen.png");
-		foreach (Questions bitmap in databaseOutput)
-		{
-			possibleAnswer.Add(new Bitmap(pathToFolder+bitmap.Location));
-		}
+		if (databaseOutput != null && !databaseOutput.Any() && pathToFolder is not null or "") return new Bitmap(pathToFolder + "ActualSchoolInternal/Assets/BlankScreen.png");
+		
+        if (databaseOutput != null)
+			foreach (Questions bitmap in databaseOutput)
+			{
+				possibleAnswer.Add(new Bitmap(pathToFolder + bitmap.Location));
+			}
+        
+        
 
 		Random generateBitmap = new();
-		
-		Bitmap? outPut = possibleAnswer[generateBitmap.Next(0,possibleAnswer.Count-1)];
 
-		return outPut;
+		try
+		{
+			Bitmap? outPut;
+			while (true)
+			{
+				outPut = possibleAnswer[generateBitmap.Next(0, possibleAnswer.Count)];
+				
+				if (outPut != currentQuestion) break;
+			}
+
+			return outPut;
+		}
+		catch (Exception e)
+		{
+			Bitmap outPut = new(pathToFolder+"ActualSchoolInternal/Assets/BlankScreen.png");
+			
+			Console.WriteLine(e);
+			
+			return outPut;
+		}
+		
 	}
 }

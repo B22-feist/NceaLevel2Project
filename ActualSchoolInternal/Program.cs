@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using System;
 using ActualSchoolInternal.Models.Database.Database.Data;
+using Avalonia.ReactiveUI;
 
 namespace ActualSchoolInternal;
 
@@ -18,5 +19,6 @@ sealed class Program
 		=> AppBuilder.Configure<App>()
 			.UsePlatformDetect()
 			.WithInterFont()
-			.LogToTrace();
+			.LogToTrace()
+			.UseReactiveUI();
 }

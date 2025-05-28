@@ -4,37 +4,37 @@ public static class QuestionGeneratorSettings
 {
 	public static string? QuestionDifficutly(bool achieved, bool merit, bool excellence)
 	{
-		if (excellence) return "exellence";
+		if (excellence) return "Excellence";
 		
-		if (achieved) return "achieved";
+		if (achieved) return "Achieved";
 		
-		if (merit) return "merit";
+		if (merit) return "Merit";
 
 		return string.Empty;
 	}
 
 	public static string? Operation(bool log, bool exponential, bool quadratic, bool linear)
 	{
-		if (exponential) return "exponential";
+		if (exponential) return "Exponential";
 		
-		else if (quadratic) return "quadratic";
+		else if (quadratic) return "Quadratic";
 
-		else if (linear) return "linear";
+		else if (linear) return "Linear";
 		
-		else if(log) return "log";
+		else if(log) return "Log";
 		
 		return string.Empty;
 	}
 
 	public static string? TypeOfQuestion(bool simplify, bool expand, bool factorise, bool solve)
 	{
-		if (solve) return "solve";
+		if (solve) return "Solve";
 		
-		if (factorise) return "factorise";
+		if (factorise) return "Factorise";
 		
-		if (expand) return "expand";
+		if (expand) return "Expand";
 		
-		if(simplify) return "simplify";
+		if(simplify) return "Simplify";
 
 		return string.Empty;
 	}
