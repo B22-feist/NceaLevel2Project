@@ -5,7 +5,7 @@ namespace ActualSchoolInternal.Models.Database.Database.Data;
 
 public class GetData
 {
-	public Bitmap? DataBaseOutput(string? difficultly, string? operation, string? typeOfQuestion, Bitmap? currentQuestion)
+	public string DataBaseOutput(string? difficultly, string? operation, string? typeOfQuestion, string? currentQuestion)
 	{
 		using QuestionContext context = new();
 
@@ -79,43 +79,62 @@ public class GetData
 			}
 		}
 	
-
-		List<Bitmap?> possibleAnswer = [];
+		
 
 		string? pathToFolder = GetFolderPath.FolderPath();
 
-		if (databaseOutput != null && !databaseOutput.Any() && pathToFolder is not null or "") return new Bitmap(pathToFolder + "ActualSchoolInternal/Assets/BlankScreen.png");
-		
-        if (databaseOutput != null)
-			foreach (Questions bitmap in databaseOutput)
-			{
-				possibleAnswer.Add(new Bitmap(pathToFolder + bitmap.Location));
-			}
-        
-        
+		if (databaseOutput != null && !databaseOutput.Any() && pathToFolder is not null or "") return pathToFolder + "ActualSchoolInternal/Assets/BlankScreen.png";
 
 		Random generateBitmap = new();
+		List<string>? possibleString= [];
 
+		if (databaseOutput != null)
+			foreach (Questions questionStringLocation in databaseOutput)
+			{
+				possibleString?.Add(questionStringLocation.Location);
+			}
+		
+		string outPutLocation;
 		try
 		{
-			Bitmap? outPut;
+			
 			while (true)
 			{
-				outPut = possibleAnswer[generateBitmap.Next(0, possibleAnswer.Count)];
-				
-				if (outPut != currentQuestion) break;
-			}
+				outPutLocation = pathToFolder+possibleString?[generateBitmap.Next(0, possibleString.Count)];
 
-			return outPut;
+				if (outPutLocation != currentQuestion) return outPutLocation;
+			}
+			
 		}
 		catch (Exception e)
 		{
-			Bitmap outPut = new(pathToFolder+"ActualSchoolInternal/Assets/BlankScreen.png");
+			outPutLocation = pathToFolder+"ActualSchoolInternal/Assets/BlankScreen.png";
 			
 			Console.WriteLine(e);
 			
-			return outPut;
+			return outPutLocation;
 		}
 		
+	}
+	
+	public string UrlLocation(string currentQuestionString)
+	{
+		string currentQuestionStringAppened = currentQuestionString.Substring(GetFolderPath.FolderPath().Length);
+		using QuestionContext context = new();
+
+		IQueryable<Questions> currentDbSetQuestions = context.Questions!
+			.Where(x => x.Location == currentQuestionStringAppened);
+
+		Questions dbQuestion = currentDbSetQuestions.ToArray()[0];
+
+		int questionId = dbQuestion.Id;
+
+		IQueryable<Answers> answerDb = context.Answers
+			.Where(x => x.Id == questionId);
+
+		Answers urlAnswer = answerDb.ToArray()[0];
+
+		string url = urlAnswer.TutorialUrl;
+		return url;
 	}
 }

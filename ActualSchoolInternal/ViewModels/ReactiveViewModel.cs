@@ -42,17 +42,33 @@ public class ReactiveViewModel : ReactiveObject
 	public bool Factorise { get; set; }
 	public bool Solve { get; set; }
 
+	private static string? CurrentStringPath { get; set; }
+
 	public ReactiveViewModel()
 	{
 		QuestionGenerateCommand = ReactiveCommand.Create(QuestionGenerator);
+		
+		DisplayAnswerCommand = ReactiveCommand.Create(DisplayAnswer);
 	}
 	
 	public ReactiveCommand<Unit, Unit> QuestionGenerateCommand { get; }
+	
+	public ReactiveCommand<Unit, Unit> DisplayAnswerCommand { get; }
 
 	private void QuestionGenerator()
 	{
-		CurrentQuestion = _checkQuestion.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficutly(Achieved, Merit, Excellence),
+		CurrentStringPath =  _checkQuestion.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficutly(Achieved, Merit, Excellence),
 			QuestionGeneratorSettings.Operation(Logarithm, Exponential, Quadratic, Linear),
-			QuestionGeneratorSettings.TypeOfQuestion(Simplify, Expand, Factorise, Solve), _currentQuestion);
+			QuestionGeneratorSettings.TypeOfQuestion(Simplify, Expand, Factorise, Solve), CurrentStringPath);
+
+
+		if (CurrentStringPath == (GetFolderPath.FolderPath() + "ActualSchoolInternal/Assets/BlankScreen.png")) return;
+		CurrentQuestion = new Bitmap(CurrentStringPath);
+		TutorialUrl = _checkQuestion.UrlLocation(CurrentStringPath);
+	}
+
+	private void DisplayAnswer()
+	{
+		
 	}
 }
