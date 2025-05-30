@@ -1,4 +1,5 @@
-﻿using ActualSchoolInternal.Models.Utilities;
+﻿using System.Diagnostics;
+using ActualSchoolInternal.Models.Utilities;
 using Avalonia.Media.Imaging;
 
 namespace ActualSchoolInternal.Models.Database.Database.Data;
@@ -119,7 +120,7 @@ public class GetData
 	
 	public string UrlLocation(string currentQuestionString)
 	{
-		string currentQuestionStringAppened = currentQuestionString.Substring(GetFolderPath.FolderPath().Length);
+		string currentQuestionStringAppened = currentQuestionString[GetFolderPath.FolderPath().Length..];
 		using QuestionContext context = new();
 
 		IQueryable<Questions> currentDbSetQuestions = context.Questions!
@@ -136,5 +137,27 @@ public class GetData
 
 		string url = urlAnswer.TutorialUrl;
 		return url;
+	}
+
+	public string GetAnswersLocation(string currentQuestionString)
+	{
+		string currentQuestionStringAppened = currentQuestionString[GetFolderPath.FolderPath().Length..];
+		
+		using QuestionContext context = new();
+
+		Debug.Assert(context.Questions != null);
+		IQueryable<Questions> questionsDb = context.Questions;
+		IQueryable<Answers> answerDb = context.Answers;
+
+		Questions fileId = questionsDb
+				.Where(x => x.Location == currentQuestionStringAppened)
+				.ToArray()[0];
+		
+			Answers answerLocation = answerDb
+				.Where(x => x.Id == fileId.Id)
+				.ToArray()[0];
+		
+			
+		return GetFolderPath.FolderPath() + answerLocation.LocationOfFile;
 	}
 }

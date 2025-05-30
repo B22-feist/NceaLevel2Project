@@ -43,6 +43,8 @@ public class ReactiveViewModel : ReactiveObject
 	public bool Solve { get; set; }
 
 	private static string? CurrentStringPath { get; set; }
+	
+	private string AnswerLocation { get; set; }
 
 	public ReactiveViewModel()
 	{
@@ -69,6 +71,8 @@ public class ReactiveViewModel : ReactiveObject
 
 	private void DisplayAnswer()
 	{
-		
+		AnswerLocation = _checkQuestion.GetAnswersLocation(CurrentStringPath);
+
+		CurrentQuestion = new Bitmap(AnswerLocation);
 	}
 }
