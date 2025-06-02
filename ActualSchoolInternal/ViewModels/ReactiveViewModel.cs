@@ -42,9 +42,9 @@ public class ReactiveViewModel : ReactiveObject
 	public bool Factorise { get; set; }
 	public bool Solve { get; set; }
 
-	private static string? CurrentStringPath { get; set; }
+	private string? CurrentStringPath { get; set; }
 	
-	private string AnswerLocation { get; set; }
+	private string? AnswerLocation { get; set; }
 
 	public ReactiveViewModel()
 	{
@@ -59,9 +59,11 @@ public class ReactiveViewModel : ReactiveObject
 
 	private void QuestionGenerator()
 	{
-		CurrentStringPath =  _checkQuestion.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficutly(Achieved, Merit, Excellence),
+		string asyncQuestionPath = _checkQuestion.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficutly(Achieved, Merit, Excellence),
 			QuestionGeneratorSettings.Operation(Logarithm, Exponential, Quadratic, Linear),
 			QuestionGeneratorSettings.TypeOfQuestion(Simplify, Expand, Factorise, Solve), CurrentStringPath);
+		
+		CurrentStringPath = asyncQuestionPath;
 
 
 		if (CurrentStringPath == (GetFolderPath.FolderPath() + "ActualSchoolInternal/Assets/BlankScreen.png")) return;
@@ -69,9 +71,9 @@ public class ReactiveViewModel : ReactiveObject
 		TutorialUrl = _checkQuestion.UrlLocation(CurrentStringPath);
 	}
 
-	private void DisplayAnswer()
+	private  void DisplayAnswer()
 	{
-		AnswerLocation = _checkQuestion.GetAnswersLocation(CurrentStringPath);
+		if (CurrentStringPath != null) AnswerLocation = _checkQuestion.GetAnswersLocation(CurrentStringPath);
 
 		CurrentQuestion = new Bitmap(AnswerLocation);
 	}
