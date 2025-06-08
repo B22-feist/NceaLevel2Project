@@ -1,20 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ActualSchoolInternal.Models.Database;
 
-public partial class Questions
+public class Questions
 {
 	public int Id { get; set; }
 	
+	[MaxLength(100)]
 	public required string Operation { get; set; }
 	
+	[MaxLength(100)]
 	public required string Difficulty  { get; set; }
-	
+	[MaxLength(100)]
 	public required string Location  { get; set; }
-	
+	[MaxLength(100)]
 	public required string TypeOfQuestion { get; set; }
 	
+	[MaxLength(100)]
 	public required string Name { get; set; }
 	
-	public required ICollection<Answers> answers { get; set; }
+	public required ICollection<Answers> Answers { get; set; }
 }

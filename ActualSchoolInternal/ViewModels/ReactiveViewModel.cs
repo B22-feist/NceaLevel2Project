@@ -75,6 +75,7 @@ public class ReactiveViewModel : ReactiveObject
 	{
 		if (CurrentStringPath != null) AnswerLocation = _checkQuestion.GetAnswersLocation(CurrentStringPath);
 
-		CurrentQuestion = new Bitmap(AnswerLocation);
+		if (AnswerLocation != null)
+			CurrentQuestion = new Bitmap(AnswerLocation);
 	}
 }

@@ -77,13 +77,14 @@ public class GetData
 
 				break;
 			}
-		}
-	
-		
+		}	
 
 		string? pathToFolder = GetFolderPath.FolderPath();
 
-		if (databaseOutput != null && !databaseOutput.Any() && pathToFolder is not null or "") return pathToFolder + "ActualSchoolInternal/Assets/BlankScreen.png";
+		if (databaseOutput != null && !databaseOutput.Any() && pathToFolder is not null or "")
+		{
+			return pathToFolder + "ActualSchoolInternal/Assets/BlankScreen.png";
+		}
 
 		Random generateBitmap = new();
 		List<string>? possibleString= [];
@@ -102,7 +103,9 @@ public class GetData
 			{
 				outPutLocation = pathToFolder+possibleString?[generateBitmap.Next(0, possibleString.Count)];
 
-				if (outPutLocation != currentQuestion) return outPutLocation;
+				if (outPutLocation == currentQuestion) continue;
+				Console.WriteLine(outPutLocation);
+				return outPutLocation;
 			}
 			
 		}
@@ -117,7 +120,7 @@ public class GetData
 		
 	}
 	
-	public string UrlLocation(string currentQuestionString)
+	public string? UrlLocation(string currentQuestionString)
 	{
 		string currentQuestionStringAppend = currentQuestionString[GetFolderPath.FolderPath().Length..];
 		using QuestionContext context = new();
@@ -134,7 +137,7 @@ public class GetData
 
 		Answers urlAnswer = answerDb.ToArray()[0];
 
-		string url = urlAnswer.TutorialUrl;
+		string? url = urlAnswer.TutorialUrl;
 		return url;
 	}
 
@@ -155,7 +158,6 @@ public class GetData
 			Answers answerLocation = answerDb
 				.Where(x => x.Id == fileId.Id)
 				.ToArray()[0];
-		
 			
 		return GetFolderPath.FolderPath() + answerLocation.LocationOfFile;
 	}

@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ActualSchoolInternal.Models.Database;
 
-public partial class Answers
+public class Answers
 {
-	public int Id { get; set; }
+	public int Id { get; init; }
 	
-	public required string LocationOfFile { get; set; }
+	[MaxLength(200)]
+	public required string LocationOfFile { get; init; }
 	
-	public string TutorialUrl { get; set; }
+	[MaxLength(200)]
+	public string? TutorialUrl { get; set; }
 	
-	public required string Name { get; set; }
+	[MaxLength(200)]
+	public required string Name { get; init; }
 	
-	public required Questions Questions { get; set; }
+	public required Questions Questions { get; init; }
 }

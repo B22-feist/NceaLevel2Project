@@ -45,7 +45,7 @@ public class QuestionContext : DbContext
 			entity.HasKey(e => e.Id);
 			
 			entity.HasOne(q => q.Questions)
-				.WithMany(a => a.answers)
+				.WithMany(a => a.Answers)
 				.HasForeignKey(q => q.Id)
 				.OnDelete(DeleteBehavior.ClientSetNull)
 				.HasConstraintName("FK_answers");
