@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ActualSchoolInternal.Models.Utilities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ActualSchoolInternal.Models.Database.Database.Data;
 
@@ -12,10 +13,9 @@ public class QuestionContext : DbContext
 
 	public QuestionContext()
 	{
-		const Environment.SpecialFolder folder = Environment.SpecialFolder.ApplicationData;
-		
-		string path = Environment.GetFolderPath(folder);
-		DbPath = Path.Combine(path, "ActualSchoolInternal.db");
+		string folder = GetFolderPath.FolderPath();
+
+		DbPath = Path.Combine(folder, "ActualSchoolInternal.db");
 	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -27,16 +27,18 @@ public class ReactiveViewModel : ReactiveObject
 		set => this.RaiseAndSetIfChanged(ref _tutorialUrl, value);
 	}
 
+	/*Type of question*/		
 	public bool Logarithm { get; set; }
 	public bool Exponential { get; set; }
 	public bool Quadratic { get; set; }
 	public bool Linear { get; set; }
 
+	/*Difficultly of question*/
 	public bool Excellence { get; set; }
 	public bool Merit { get; set; }
 	public bool Achieved { get; set; }
 
-
+	/*Operating of question*/
 	public bool Simplify { get; set; }
 	public bool Expand { get; set; }
 	public bool Factorise { get; set; }
@@ -66,7 +68,7 @@ public class ReactiveViewModel : ReactiveObject
 		CurrentStringPath = asyncQuestionPath;
 
 
-		if (CurrentStringPath == (GetFolderPath.FolderPath() + "ActualSchoolInternal/Assets/BlankScreen.png")) return;
+		if (CurrentStringPath == (GetFolderPath.FolderPath() + "ActualSchoolInternal/Assets/NoQuestionsMatchYourSettings.png")) return;
 		CurrentQuestion = new Bitmap(CurrentStringPath);
 		TutorialUrl = _checkQuestion.UrlLocation(CurrentStringPath);
 	}

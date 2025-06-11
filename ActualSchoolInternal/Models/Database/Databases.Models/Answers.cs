@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace ActualSchoolInternal.Models.Database;
-
+/*This class is used to model answer database and answers to questions*/
 public class Answers
 {
 	public int Id { get; init; }

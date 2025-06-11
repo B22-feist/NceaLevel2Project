@@ -3,14 +3,22 @@ using ActualSchoolInternal.Models.Utilities;
 
 namespace ActualSchoolInternal.Models.Database.Database.Data;
 
+/*This class is used to accessing the database
+ from the view model*/
 public class GetData
 {
+	/*This method is used to get the questions from the database
+	 depending on the difficultly, operation, type of question(i.e. quadratic, linear)
+	 Current question is used to make sure that the same setting don't generate the same answer*/
 	public string DataBaseOutput(string? difficultly, string? operation, string? typeOfQuestion, string? currentQuestion)
 	{
 		using QuestionContext context = new();
 
 		IQueryable<Questions>? databaseOutput = null;
 
+		/*This switch block performs a query based on if
+		 difficultly, operating or type of question are null
+		 and puts the return value into database output*/
 		 switch (difficultly)
 		{
 			case "" when typeOfQuestion == "" && operation == "":
@@ -79,21 +87,22 @@ public class GetData
 			}
 		}	
 
-		string? pathToFolder = GetFolderPath.FolderPath();
+		 /*This get the path to the solution root to add an image*/
+		string pathToFolder = GetFolderPath.FolderPath();
 
-		if (databaseOutput != null && !databaseOutput.Any() && pathToFolder is not null or "")
+		/*If the request comes back */
+		if (databaseOutput == null || !databaseOutput.Any())
 		{
-			return pathToFolder + "ActualSchoolInternal/Assets/BlankScreen.png";
+			return pathToFolder + "ActualSchoolInternal/Assets/NoQuestionsMatchYourSettings.png";
 		}
 
 		Random generateBitmap = new();
 		List<string>? possibleString= [];
 
-		if (databaseOutput != null)
-			foreach (Questions questionStringLocation in databaseOutput)
-			{
-				possibleString?.Add(questionStringLocation.Location);
-			}
+		foreach (Questions questionStringLocation in databaseOutput)
+		{
+			possibleString?.Add(questionStringLocation.Location);
+		}
 		
 		string outPutLocation;
 		try
@@ -111,7 +120,7 @@ public class GetData
 		}
 		catch (Exception e)
 		{
-			outPutLocation = pathToFolder+"ActualSchoolInternal/Assets/BlankScreen.png";
+			outPutLocation = pathToFolder+"ActualSchoolInternal/Assets/NoQuestionsMatchYourSettings.png";
 			
 			Console.WriteLine(e);
 			
@@ -141,7 +150,7 @@ public class GetData
 		return url;
 	}
 
-	public string? GetAnswersLocation(string currentQuestionString)
+	public string GetAnswersLocation(string currentQuestionString)
 	{
 		string currentQuestionStringAppend = currentQuestionString[GetFolderPath.FolderPath().Length..];
 

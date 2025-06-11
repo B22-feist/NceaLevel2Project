@@ -32,6 +32,7 @@
             <!--Grid of Question options-->
             <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*" Grid.Column="0">
                 
+                
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
                     <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Logarithm}"/>
                     <RadioButton GroupName="TypeOfQuestion" Content="Exponential"  Classes="RadioButtonBorderBlack" IsChecked="{Binding  Exponential}"/>
