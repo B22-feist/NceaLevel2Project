@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace ActualSchoolInternal.Models.Database;
-/*This class is used to model question and the quesiton database*/
+/*This class is used to model question and the question database*/
 public class Questions
 {
 	public int Id { get; set; }
@@ -18,6 +18,9 @@ public class Questions
 	
 	[MaxLength(100)]
 	public required string Name { get; set; }
-	
+
+	[MaxLength(100)] 
+	public string? TutorialUrl { get; set; }
+
 	public required ICollection<Answers> Answers { get; set; }
 }

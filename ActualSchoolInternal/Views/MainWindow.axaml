@@ -18,6 +18,7 @@
 
     <StackPanel DataContext="{Binding ReactiveViewModel}" >
         
+        <!--Gives element with RadioButtonBorderBlack class a border-->
         <StackPanel.Styles>
             <Style Selector="RadioButton.RadioButtonBorderBlack">
                 <Setter Property="BorderBrush" Value="Black"/>
@@ -32,7 +33,7 @@
             <!--Grid of Question options-->
             <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*" Grid.Column="0">
                 
-                
+                <!--Type of question radio button-->
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
                     <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Logarithm}"/>
                     <RadioButton GroupName="TypeOfQuestion" Content="Exponential"  Classes="RadioButtonBorderBlack" IsChecked="{Binding  Exponential}"/>
@@ -40,12 +41,14 @@
                     <RadioButton GroupName="TypeOfQuestion" Content="Linear" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Linear}"/>
                 </StackPanel>
                 
+                <!--Difficultly of question radio button-->
                 <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
                     <RadioButton GroupName="QuestionDifficultly" Content="Excellence" Classes="RadioButtonBorderBlack" IsChecked="{Binding Excellence}"/>
                     <RadioButton GroupName="QuestionDifficultly" Content="Merit" Classes="RadioButtonBorderBlack" IsChecked="{Binding Merit}"/>
                     <RadioButton GroupName="QuestionDifficultly" Content="Achieved" Classes="RadioButtonBorderBlack" IsChecked="{Binding Achieved}"/>
                 </StackPanel>
                 
+                <!--Operation of question radio button-->
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
                     <RadioButton GroupName="OperationOfQuestion" Content="Simplify" Classes="RadioButtonBorderBlack" IsChecked="{Binding Simplify}"/>
                     <RadioButton GroupName="OperationOfQuestion" Content="Expand" Classes="RadioButtonBorderBlack" IsChecked="{Binding Expand}"/>
@@ -53,25 +56,28 @@
                     <RadioButton GroupName="OperationOfQuestion" Content="Solve" Classes="RadioButtonBorderBlack" IsChecked="{Binding Solve}"/>
                 </StackPanel>
                 
+                <!--URl to video tutorials that works-->
                 <Border  Grid.Column="1" Grid.Row="2" BorderThickness="3" Margin="10">
-                    <SelectableTextBlock Name="TutorialLink" Text="{Binding TutorialUrl}" TextWrapping="Wrap"/>
+                    <HyperlinkButton Name="Hyperlink" Content="{Binding TutorialUrl}" ></HyperlinkButton>
                 </Border>
             </Grid>
            
             
             <!--Grid of Question display box, add question and remove question box grid-->
             <Grid Row="0" Column="1" Name="QuestionsAddRemoveGrid" ColumnDefinitions="*" RowDefinitions="*,*" HorizontalAlignment="Right">
+                <!--Current question display-->
                 <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1">
                     <Image  Name="QuestionDisplay" Source="{Binding CurrentQuestion}" Height="200" Width="500"/>
                 </Border>
                 
                 <!-- Grid of question remove/add boxes-->
-              
                 <Grid Row="1" Column="0" ColumnDefinitions="*,*" RowDefinitions="*" Name="AddRemoveGrid">
+                   <!--Generate new question button-->
                     <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black">
                         <Button Content="Generate new question" Padding="10" Command="{Binding QuestionGenerateCommand}"/>
                     </Border>
                     
+                   <!--Display answer button-->
                     <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
                         <Button Content="Display answer" Padding="10" Command="{Binding DisplayAnswerCommand}"/>
                     </Border>

@@ -90,15 +90,16 @@ public class GetData
 		 /*This get the path to the solution root to add an image*/
 		string pathToFolder = GetFolderPath.FolderPath();
 
-		/*If the request comes back */
+		/*If the request comes back empty, returns No questions match image*/
 		if (databaseOutput == null || !databaseOutput.Any())
 		{
 			return pathToFolder + "ActualSchoolInternal/Assets/NoQuestionsMatchYourSettings.png";
 		}
-
+		
 		Random generateBitmap = new();
 		List<string>? possibleString= [];
 
+		/*Adds the different Questions to a list*/
 		foreach (Questions questionStringLocation in databaseOutput)
 		{
 			possibleString?.Add(questionStringLocation.Location);
@@ -107,7 +108,10 @@ public class GetData
 		string outPutLocation;
 		try
 		{
-			
+			/*tries to generate a new question
+			 if generate is equal to current question then generate a new question
+			 if fails, displays no questions match settings
+			 and writes error to stdin*/
 			while (true)
 			{
 				outPutLocation = pathToFolder+possibleString?[generateBitmap.Next(0, possibleString.Count)];
@@ -129,45 +133,51 @@ public class GetData
 		
 	}
 	
+	/*Get tutorial location from question table*/
 	public string? UrlLocation(string currentQuestionString)
 	{
+		/*gets the location of file from sln root*/
 		string currentQuestionStringAppend = currentQuestionString[GetFolderPath.FolderPath().Length..];
+		/*sets the db context*/
 		using QuestionContext context = new();
-
+		
+		/*WON'T BE NULL AS ! IS USED, IF CHANGED, CHECK IF NULL
+		 Gets the db record associated with the file*/
 		IQueryable<Questions> currentDbSetQuestions = context.Questions!
 			.Where(x => x.Location == currentQuestionStringAppend);
 
-		Questions dbQuestion = currentDbSetQuestions.ToArray()[0];
-
-		int questionId = dbQuestion.Id;
-
-		IQueryable<Answers> answerDb = context.Answers
-			.Where(x => x.Id == questionId);
-
-		Answers urlAnswer = answerDb.ToArray()[0];
-
-		string? url = urlAnswer.TutorialUrl;
-		return url;
+		/*Parses the db set into a an array of question class and extracts the tutorial url*/
+		string? urlLocation = currentDbSetQuestions.ToArray()[0].TutorialUrl;
+		
+		return urlLocation;
 	}
 
+	/*Gets the answer when show answer is pressed*/
 	public string GetAnswersLocation(string currentQuestionString)
 	{
+		/*gets current question location*/
 		string currentQuestionStringAppend = currentQuestionString[GetFolderPath.FolderPath().Length..];
 
+		/*sets db context*/
 		using QuestionContext context = new();
 
+		/*check if context is null and if not creates question and answer
+		 db sets*/
 		Debug.Assert(context.Questions != null);
 		IQueryable<Questions> questionsDb = context.Questions;
 		IQueryable<Answers> answerDb = context.Answers;
 
+		/*gets id of current question*/
 		Questions fileId = questionsDb
 				.Where(x => x.Location == currentQuestionStringAppend)
 				.ToArray()[0];
 		
-			Answers answerLocation = answerDb
-				.Where(x => x.Id == fileId.Id)
-				.ToArray()[0];
-			
+		/*gets the answer location*/ 
+        Answers answerLocation = answerDb 
+            .Where(x => x.Id == fileId.Id) 
+            .ToArray()[0];
+        
+        /*returns answer location*/
 		return GetFolderPath.FolderPath() + answerLocation.LocationOfFile;
 	}
 }
