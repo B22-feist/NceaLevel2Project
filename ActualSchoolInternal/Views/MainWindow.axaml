@@ -58,7 +58,8 @@
                 
                 <!--URl to video tutorials that works-->
                 <Border  Grid.Column="1" Grid.Row="2" BorderThickness="3" Margin="10">
-                    <HyperlinkButton Name="Hyperlink" Content="{Binding TutorialUrl}" ></HyperlinkButton>
+                    <HyperlinkButton Name="Hyperlink" Content="Tutorial Url" NavigateUri="{Binding TutorialUrl}" 
+                                     Click="UrlGoTo"/>
                 </Border>
             </Grid>
            

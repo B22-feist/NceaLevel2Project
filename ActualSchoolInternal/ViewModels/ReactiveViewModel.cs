@@ -1,4 +1,5 @@
-﻿using System.Reactive;
+﻿using System.Diagnostics;
+using System.Reactive;
 using ActualSchoolInternal.Models.Database.Database.Data;
 using ActualSchoolInternal.Models.Utilities;
 using Avalonia.Media.Imaging;
@@ -22,6 +23,7 @@ public class ReactiveViewModel : ReactiveObject
 		set => this.RaiseAndSetIfChanged(ref _currentQuestion, value );
 	}
 
+	/*hyperlink to tutorial url*/
 	private string? _tutorialUrl;
 	public string? TutorialUrl
 	{
@@ -60,6 +62,7 @@ public class ReactiveViewModel : ReactiveObject
 		QuestionGenerateCommand = ReactiveCommand.Create(QuestionGenerator);
 		
 		DisplayAnswerCommand = ReactiveCommand.Create(DisplayAnswer);
+		
 	}
 	
 	/*Buttons command bindings*/
@@ -97,4 +100,6 @@ public class ReactiveViewModel : ReactiveObject
 		if (AnswerLocation != null)
 			CurrentQuestion = new Bitmap(AnswerLocation);
 	}
+
+	
 }
