@@ -2,7 +2,7 @@
 
 public static class QuestionGeneratorSettings
 {
-	public static string? QuestionDifficutly(bool achieved, bool merit, bool excellence)
+	public static string QuestionDifficultly(bool achieved, bool merit, bool excellence)
 	{
 		if (excellence) return "Excellence";
 		
@@ -13,20 +13,20 @@ public static class QuestionGeneratorSettings
 		return string.Empty;
 	}
 
-	public static string? Operation(bool log, bool exponential, bool quadratic, bool linear)
+	public static string Operation(bool log, bool exponential, bool quadratic, bool linear)
 	{
 		if (exponential) return "Exponential";
-		
-		else if (quadratic) return "Quadratic";
 
-		else if (linear) return "Linear";
-		
-		else if(log) return "Log";
-		
+		if (quadratic) return "Quadratic";
+
+		if (linear) return "Linear";
+
+		if(log) return "Log";
+
 		return string.Empty;
 	}
 
-	public static string? TypeOfQuestion(bool simplify, bool expand, bool factorise, bool solve)
+	public static string TypeOfQuestion(bool simplify, bool expand, bool factorise, bool solve)
 	{
 		if (solve) return "Solve";
 		

@@ -112,15 +112,17 @@ public class GetData
 			 if generate is equal to current question then generate a new question
 			 if fails, displays no questions match settings
 			 and writes error to stdin*/
-			while (true)
+			for(int numRepeats =0; numRepeats < 100; numRepeats++ )
 			{
-				outPutLocation = pathToFolder+possibleString?[generateBitmap.Next(0, possibleString.Count)];
+				 outPutLocation = pathToFolder+possibleString?[generateBitmap.Next(0, possibleString.Count)];
+				
 
 				if (outPutLocation == currentQuestion) continue;
 				Console.WriteLine(outPutLocation);
 				return outPutLocation;
 			}
 			
+			Console.WriteLine();
 		}
 		catch (Exception e)
 		{
@@ -130,7 +132,8 @@ public class GetData
 			
 			return outPutLocation;
 		}
-		
+
+		return pathToFolder + "ActualSchoolInternal/Assets/NoQuestionsMatchYourSettings.png";
 	}
 	
 	/*Get tutorial location from question table*/
@@ -146,7 +149,7 @@ public class GetData
 		IQueryable<Questions> currentDbSetQuestions = context.Questions!
 			.Where(x => x.Location == currentQuestionStringAppend);
 
-		/*Parses the db set into a an array of question class and extracts the tutorial url*/
+		/*Parses the db set into an array of question class and extracts the tutorial url*/
 		string? urlLocation = currentDbSetQuestions.ToArray()[0].TutorialUrl;
 		
 		return urlLocation;

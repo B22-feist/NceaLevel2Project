@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Reactive;
+﻿using System.Reactive;
 using ActualSchoolInternal.Models.Database.Database.Data;
 using ActualSchoolInternal.Models.Utilities;
 using Avalonia.Media.Imaging;
@@ -73,7 +72,7 @@ public class ReactiveViewModel : ReactiveObject
 	private void QuestionGenerator()
 	{
 		/*Set current string path to a question, can be Questions don't match settings*/
-		CurrentStringPath  = _checkQuestion.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficutly(Achieved, Merit, Excellence),
+		CurrentStringPath  = _checkQuestion.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficultly(Achieved, Merit, Excellence),
 			QuestionGeneratorSettings.Operation(Logarithm, Exponential, Quadratic, Linear),
 			QuestionGeneratorSettings.TypeOfQuestion(Simplify, Expand, Factorise, Solve), CurrentStringPath);
 
@@ -100,6 +99,4 @@ public class ReactiveViewModel : ReactiveObject
 		if (AnswerLocation != null)
 			CurrentQuestion = new Bitmap(AnswerLocation);
 	}
-
-	
 }
