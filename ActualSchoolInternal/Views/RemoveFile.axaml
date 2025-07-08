@@ -2,8 +2,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels = "clr-namespace:ActualSchoolInternal.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:CompileBindings="True"
         x:Class="ActualSchoolInternal.Views.RemoveFile"
+        x:DataType="viewModels:MainWindowViewModel"
         Title="RemoveFile">
     
+        <StackPanel DataContext="{Binding RemoveQuestionViewModel}">
+                <!--Grid of page-->
+                <Grid RowDefinitions=" *, 3*">
+                        <!--Grid of left side of page -->
+                        <Grid Grid.Row="0" ColumnDefinitions="Auto, Auto, Auto">
+                                <TextBlock Grid.Column="0" Text="Remove Question Screen"/>
+                                <ListBox Grid.Column="1" x:Name="ListBox"/>
+                                <Button Grid.Column="2" Content="Remove Selected Question"/>
+                        </Grid>
+                        
+                        <Grid Grid.Row="1" RowDefinitions="*, *,Auto" >
+                                <Image Grid.Row="0" Source="../Assets/NoQuestionsMatchYourSettings.png"/>
+                                <Grid Grid.Row="1" ColumnDefinitions="*,*,*">
+                                        
+                                </Grid>
+                                <Button Grid.Row="2" />
+                        </Grid>
+                </Grid>
+                
+        </StackPanel>
 </Window>

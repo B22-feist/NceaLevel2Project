@@ -10,7 +10,7 @@ public class GetData
 	/*This method is used to get the questions from the database
 	 depending on the difficultly, operation, type of question(i.e. quadratic, linear)
 	 Current question is used to make sure that the same setting don't generate the same answer*/
-	public string DataBaseOutput(string? difficultly, string? operation, string? typeOfQuestion, string? currentQuestion)
+	public static string DataBaseOutput(string? difficultly, string? operation, string? typeOfQuestion, string? currentQuestion)
 	{
 		using QuestionContext context = new();
 
@@ -137,7 +137,7 @@ public class GetData
 	}
 	
 	/*Get tutorial location from question table*/
-	public string? UrlLocation(string currentQuestionString)
+	public static string? UrlLocation(string currentQuestionString)
 	{
 		/*gets the location of file from sln root*/
 		string currentQuestionStringAppend = currentQuestionString[GetFolderPath.FolderPath().Length..];
@@ -156,7 +156,7 @@ public class GetData
 	}
 
 	/*Gets the answer when show answer is pressed*/
-	public string GetAnswersLocation(string currentQuestionString)
+	public static string GetAnswersLocation(string currentQuestionString)
 	{
 		/*gets current question location*/
 		string currentQuestionStringAppend = currentQuestionString[GetFolderPath.FolderPath().Length..];
@@ -182,5 +182,16 @@ public class GetData
         
         /*returns answer location*/
 		return GetFolderPath.FolderPath() + answerLocation.LocationOfFile;
+	}
+
+	/*Used to load DB into memory when the program starts up
+	 IS ASYNC, KEEP ASYNC
+	 this code is async to allow the program to keep running while request is fetched*/
+	public async Task<bool> LoadDb()
+	{
+		await using QuestionContext context = new();
+		IQueryable<Answers> getSomethingWorking =context.Answers
+			.Where(i => i.Id == 1);
+		return getSomethingWorking.Any();
 	}
 }

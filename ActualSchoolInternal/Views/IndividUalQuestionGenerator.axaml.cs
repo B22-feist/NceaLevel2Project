@@ -4,10 +4,10 @@ using Avalonia.Interactivity;
 
 namespace ActualSchoolInternal.Views;
 
-public partial class MainWindow : Window
+public partial class IndividualQuestionGenerator : Window
 {
 	
-	public MainWindow()
+	public IndividualQuestionGenerator()
 	{
 		InitializeComponent();
 	}

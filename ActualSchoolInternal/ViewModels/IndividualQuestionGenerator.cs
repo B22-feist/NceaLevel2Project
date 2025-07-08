@@ -6,7 +6,7 @@ using ReactiveUI;
 
 namespace ActualSchoolInternal.ViewModels;
 
-public class ReactiveViewModel : ReactiveObject
+public class IndividualQuestionGenerator : PageViewModelBase
 {
 	/*Get data object  to be used in class*/
 	private readonly GetData _checkQuestion = new();
@@ -55,7 +55,7 @@ public class ReactiveViewModel : ReactiveObject
 	/*This holds the current answers location*/
 	private string? AnswerLocation { get; set; }
 
-	public ReactiveViewModel()
+	public IndividualQuestionGenerator()
 	{
 		/*Adds button commands*/
 		QuestionGenerateCommand = ReactiveCommand.Create(QuestionGenerator);
@@ -72,7 +72,7 @@ public class ReactiveViewModel : ReactiveObject
 	private void QuestionGenerator()
 	{
 		/*Set current string path to a question, can be Questions don't match settings*/
-		CurrentStringPath  = _checkQuestion.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficultly(Achieved, Merit, Excellence),
+		CurrentStringPath  = GetData.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficultly(Achieved, Merit, Excellence),
 			QuestionGeneratorSettings.Operation(Logarithm, Exponential, Quadratic, Linear),
 			QuestionGeneratorSettings.TypeOfQuestion(Simplify, Expand, Factorise, Solve), CurrentStringPath);
 
@@ -82,21 +82,32 @@ public class ReactiveViewModel : ReactiveObject
 			CurrentQuestion = new Bitmap(GetFolderPath.FolderPath() +
 			                             "ActualSchoolInternal/Assets/NoQuestionsMatchYourSettings.png");
 		}
-		
 		/*Updates current question*/
 		else
 		{
 			CurrentQuestion = new Bitmap(CurrentStringPath);
-			TutorialUrl = _checkQuestion.UrlLocation(CurrentStringPath);
+			TutorialUrl = GetData.UrlLocation(CurrentStringPath);
 		}
 	}
 
 	/*Gets answer location and sets Current question to Answer location*/
 	private  void DisplayAnswer()
 	{
-		if (CurrentStringPath != null) AnswerLocation = _checkQuestion.GetAnswersLocation(CurrentStringPath);
+		if (CurrentStringPath != null) AnswerLocation = GetData.GetAnswersLocation(CurrentStringPath);
 
 		if (AnswerLocation != null)
 			CurrentQuestion = new Bitmap(AnswerLocation);
+	}
+
+	public override bool CanNavigateNext
+	{
+		get => true; 
+		protected set => throw new NotSupportedException();
+	}
+
+	public override bool CanNavigatePrevious
+	{
+		get => false; 
+		protected set => throw new NotSupportedException();
 	}
 }
