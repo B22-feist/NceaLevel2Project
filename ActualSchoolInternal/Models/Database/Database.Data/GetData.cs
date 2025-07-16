@@ -19,73 +19,56 @@ public class GetData
 		/*This switch block performs a query based on if
 		 difficultly, operating or type of question are null
 		 and puts the return value into database output*/
-		 switch (difficultly)
+		if (difficultly != "" && typeOfQuestion != "" && operation != "")
 		{
-			case "" when typeOfQuestion == "" && operation == "":
-				
-				databaseOutput = context.Questions;
-				break;
-			case "" when typeOfQuestion == "" && operation != "":
-
-				if (context.Questions != null)
-					databaseOutput = context.Questions
-						.Where(q => q.Operation == operation);
-				break;
-			case "" when typeOfQuestion != "" && operation == "":
-				
-				if (context.Questions != null)
-					databaseOutput = context.Questions
-						.Where(q => q.TypeOfQuestion == typeOfQuestion);
-				break;
-			default:
-			{
-				if (difficultly != "" && typeOfQuestion == "" && operation == "")
-				{
-					if (context.Questions != null)
-						databaseOutput = context.Questions
-							.Where(q => q.Difficulty == difficultly);
-				}
+			if (context.Questions != null)
+				databaseOutput = context.Questions
+					.Where(q => q.Difficulty == difficultly)
+					.Where(q => q.Operation == operation)
+					.Where(q => q.TypeOfQuestion == typeOfQuestion);
+		}
 		
-				else if (difficultly == "" && typeOfQuestion != "" && operation != "")
-				{
-					if (context.Questions != null)
-						databaseOutput = context.Questions
-							.Where(q => q.TypeOfQuestion == typeOfQuestion)
-							.Where(q => q.Operation == operation);
-				}
+		else if (difficultly != "" && typeOfQuestion != "" && operation == "")
+		{
+			if (context.Questions != null)
+				databaseOutput = context.Questions
+					.Where(q => q.Difficulty == difficultly)
+					.Where(q => q.TypeOfQuestion == typeOfQuestion);
+		}
 		
-				else if (difficultly != "" && typeOfQuestion == "" && operation != "")
-				{
-					if (context.Questions != null)
-						databaseOutput = context.Questions
-							.Where(q => q.Difficulty == typeOfQuestion)
-							.Where(q => q.Operation == operation);
-				}
+		else if (difficultly != "" && typeOfQuestion == "" && operation != "")
+		{
+			if (context.Questions != null)
+				databaseOutput = context.Questions
+					.Where(q => q.Difficulty == difficultly)
+					.Where(q => q.Operation == operation);
+		}
 
-				else switch (difficultly != "" && typeOfQuestion != "")
-				{
-					case true when operation == "":
-					{
-						if (context.Questions != null)
-							databaseOutput = context.Questions
-								.Where(q => q.TypeOfQuestion == typeOfQuestion)
-								.Where(q => q.Operation == difficultly);
-						break;
-					}
-					case true when true:
-					{
-						if (context.Questions != null)
-							databaseOutput = context.Questions
-								.Where(q => q.Operation == typeOfQuestion)
-								.Where(q => q.TypeOfQuestion == operation)
-								.Where(q => q.Difficulty == difficultly);
-						break;
-					}
-				}
+		else if (difficultly == "" && typeOfQuestion != "" && operation != "")
+		{
+			if (context.Questions != null)
+				databaseOutput = context.Questions
+					.Where(q => q.TypeOfQuestion == typeOfQuestion);
+		}
+		
+		else if (difficultly == "" && typeOfQuestion == "" && operation != "")
+		{
+			if (context.Questions != null)
+				databaseOutput = context.Questions
+					.Where(q => q.Operation == operation);
+		}
 
-				break;
-			}
-		}	
+		else if (difficultly != "" && typeOfQuestion == "" && operation == "")
+		{
+			if (context.Questions != null)
+				databaseOutput = context.Questions
+					.Where(q => q.Difficulty == difficultly);
+		}
+
+		else
+		{
+			databaseOutput = context.Questions;
+		}
 
 		 /*This get the path to the solution root to add an image*/
 		string pathToFolder = GetFolderPath.FolderPath();
@@ -187,7 +170,7 @@ public class GetData
 	/*Used to load DB into memory when the program starts up
 	 IS ASYNC, KEEP ASYNC
 	 this code is async to allow the program to keep running while request is fetched*/
-	public async Task<bool> LoadDb()
+	public static async Task<bool> LoadDb()
 	{
 		await using QuestionContext context = new();
 		IQueryable<Answers> getSomethingWorking =context.Answers

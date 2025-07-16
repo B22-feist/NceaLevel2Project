@@ -1,8 +1,6 @@
-using System;
+using ActualSchoolInternal.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using ActualSchoolInternal.ViewModels;
-using ReactiveUI;
 
 namespace ActualSchoolInternal;
 
@@ -25,6 +23,6 @@ public class ViewLocator : IDataTemplate
 	}
 	public bool Match(object? data)
 	{
-		return data is ReactiveObject;
+		return data is PageViewModelBase;
 	}
 }

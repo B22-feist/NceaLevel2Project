@@ -1,23 +1,20 @@
-<Window xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:ActualSchoolInternal.ViewModels"
-        mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:CompileBindings="True"
         x:Class="ActualSchoolInternal.Views.IndividualQuestionGenerator"
-        x:DataType="viewModels:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="SchoolInternal">
+        x:DataType="viewModels:IndividualQuestionGeneratorViewModel">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.Axaml.cs) -->
-        <viewModels:MainWindowViewModel/>
+        <viewModels:IndividualQuestionGeneratorViewModel/>
     </Design.DataContext>
 
-    <StackPanel DataContext="{Binding IndividualQuestionGenerator}" >
-        
+    <StackPanel>
         <!--Gives element with RadioButtonBorderBlack class a border-->
         <StackPanel.Styles>
             <Style Selector="RadioButton.RadioButtonBorderBlack">
@@ -68,24 +65,29 @@
             <Grid Row="0" Column="1" Name="QuestionsAddRemoveGrid" ColumnDefinitions="*" RowDefinitions="*,*" HorizontalAlignment="Right">
                 <!--Current question display-->
                 <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Height="200" Width="600">
-                    <Image Stretch="Uniform" Name="QuestionDisplay" Source="{Binding CurrentQuestion}" Height="200" Width="500"/>
+                    <Image Stretch="Uniform" Name="QuestionDisplay" 
+                           Source="{Binding CurrentQuestion}" 
+                           Height="200" Width="500"/>
                 </Border>
                 
                 <!-- Grid of question remove/add boxes-->
                 <Grid Row="1" Column="0" ColumnDefinitions="*,*" RowDefinitions="*" Name="AddRemoveGrid">
                    <!--Generate new question button-->
                     <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black">
-                        <Button Content="Generate new question" Padding="10" Command="{Binding QuestionGenerateCommand}"/>
+                        <Button Content="Generate new question" Padding="10" 
+                                Command="{Binding QuestionGenerateCommand}"
+                                IsEnabled="True"/>
                     </Border>
                     
                    <!--Display answer button-->
                     <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
-                        <Button Content="Display answer" Padding="10" Command="{Binding DisplayAnswerCommand}"/>
+                        <Button Content="Display answer" Padding="10" 
+                                Command="{Binding DisplayAnswerCommand}"
+                                IsEnabled="True"/>
                     </Border>
                 </Grid>
                 
             </Grid>
         </Grid>
-            
     </StackPanel>
-</Window>
+</UserControl>

@@ -7,6 +7,8 @@
         <entry key="ActualSchoolInternal/Views/IndividualQuestionGenerator.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
         <entry key="ActualSchoolInternal/Views/MainScreen/.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
         <entry key="ActualSchoolInternal/Views/MainWindow.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
+        <entry key="ActualSchoolInternal/Views/MainWindowView.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
+        <entry key="ActualSchoolInternal/Views/MainWindowViewModel.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
         <entry key="ActualSchoolInternal/Views/RemoveFile.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
         <entry key="ActualSchoolInternal/Views/Testing.axaml" value="ActualSchoolInternal/ActualSchoolInternal.csproj" />
       </map>

@@ -6,7 +6,6 @@ namespace ActualSchoolInternal.Views;
 
 public partial class IndividualQuestionGenerator : Window
 {
-	
 	public IndividualQuestionGenerator()
 	{
 		InitializeComponent();

@@ -1,12 +1,9 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
-using System.Linq;
 using Avalonia.Markup.Xaml;
 using ActualSchoolInternal.ViewModels;
 using ActualSchoolInternal.Views;
-using IndividualQuestionGenerator = ActualSchoolInternal.Views.IndividualQuestionGenerator;
 
 namespace ActualSchoolInternal;
 

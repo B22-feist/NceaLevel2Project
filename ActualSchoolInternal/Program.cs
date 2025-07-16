@@ -14,13 +14,11 @@ internal static class Program
 	public static async Task Main(string[] args)
 	{
 		GetData test = new();
-		Task<bool> loadDb = test.LoadDb();
+		Task<bool> loadDb = GetData.LoadDb();
 		bool loadSuccess = await loadDb;
 		Console.WriteLine(loadSuccess ? "Successfully loaded" : "Failed to load");
 		BuildAvaloniaApp()
 			.StartWithClassicDesktopLifetime(args);
-
-		
 	}
 
 	// Avalonia configuration, don't remove; also used by visual designer.

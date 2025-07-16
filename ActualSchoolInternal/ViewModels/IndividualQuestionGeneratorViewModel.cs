@@ -6,7 +6,7 @@ using ReactiveUI;
 
 namespace ActualSchoolInternal.ViewModels;
 
-public class IndividualQuestionGenerator : PageViewModelBase
+public class IndividualQuestionGeneratorViewModel : PageViewModelBase
 {
 	/*Get data object  to be used in class*/
 	private readonly GetData _checkQuestion = new();
@@ -55,7 +55,7 @@ public class IndividualQuestionGenerator : PageViewModelBase
 	/*This holds the current answers location*/
 	private string? AnswerLocation { get; set; }
 
-	public IndividualQuestionGenerator()
+	public IndividualQuestionGeneratorViewModel()
 	{
 		/*Adds button commands*/
 		QuestionGenerateCommand = ReactiveCommand.Create(QuestionGenerator);
@@ -91,7 +91,7 @@ public class IndividualQuestionGenerator : PageViewModelBase
 	}
 
 	/*Gets answer location and sets Current question to Answer location*/
-	private  void DisplayAnswer()
+	private void DisplayAnswer()
 	{
 		if (CurrentStringPath != null) AnswerLocation = GetData.GetAnswersLocation(CurrentStringPath);
 

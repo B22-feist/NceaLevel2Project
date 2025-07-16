@@ -5,15 +5,15 @@ using ReactiveUI;
 namespace ActualSchoolInternal.ViewModels;
 
 /*This is the class that the view uses to access the view model*/
-public partial class MainWindowViewModel : ReactiveObject
+public class MainWindowViewModel : ReactiveObject
 {
-	public IndividualQuestionGenerator IndividualQuestionGenerator { get; } = new();
-	
+	public IndividualQuestionGeneratorViewModel IndividualQuestionGeneratorViewModel { get; } = new();
+
 	public RemoveQuestionViewModel RemoveQuestionViewModel { get; } = new();
 
 	private readonly PageViewModelBase[] _pages =
 	{
-		new IndividualQuestionGenerator(),
+		new IndividualQuestionGeneratorViewModel(),
 		new RemoveQuestionViewModel()
 	};
 	
@@ -44,7 +44,7 @@ public partial class MainWindowViewModel : ReactiveObject
 
 	public MainWindowViewModel()
 	{
-		_selectedPage = _pages[0];
+		_selectedPage = new IndividualQuestionGeneratorViewModel();
 		IObservable<bool> canNavNext = this.WhenAnyValue(x => x.SelectedPage.CanNavigateNext);
 		IObservable<bool> canNavPrevious = this.WhenAnyValue(x => x.SelectedPage.CanNavigatePrevious);
 		
