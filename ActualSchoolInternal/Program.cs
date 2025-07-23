@@ -13,7 +13,6 @@ internal static class Program
 	[STAThread]
 	public static async Task Main(string[] args)
 	{
-		GetData test = new();
 		Task<bool> loadDb = GetData.LoadDb();
 		bool loadSuccess = await loadDb;
 		Console.WriteLine(loadSuccess ? "Successfully loaded" : "Failed to load");

@@ -7,14 +7,10 @@ namespace ActualSchoolInternal.ViewModels;
 /*This is the class that the view uses to access the view model*/
 public class MainWindowViewModel : ReactiveObject
 {
-	public IndividualQuestionGeneratorViewModel IndividualQuestionGeneratorViewModel { get; } = new();
-
-	public RemoveQuestionViewModel RemoveQuestionViewModel { get; } = new();
-
 	private readonly PageViewModelBase[] _pages =
 	{
 		new IndividualQuestionGeneratorViewModel(),
-		new RemoveQuestionViewModel()
+		new AddQuestionViewModel()
 	};
 	
 	private PageViewModelBase _selectedPage;
@@ -44,7 +40,7 @@ public class MainWindowViewModel : ReactiveObject
 
 	public MainWindowViewModel()
 	{
-		_selectedPage = new IndividualQuestionGeneratorViewModel();
+		_selectedPage = _pages[0];
 		IObservable<bool> canNavNext = this.WhenAnyValue(x => x.SelectedPage.CanNavigateNext);
 		IObservable<bool> canNavPrevious = this.WhenAnyValue(x => x.SelectedPage.CanNavigatePrevious);
 		

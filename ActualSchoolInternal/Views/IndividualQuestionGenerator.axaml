@@ -5,7 +5,7 @@
         xmlns:viewModels="clr-namespace:ActualSchoolInternal.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:CompileBindings="True"
-        x:Class="ActualSchoolInternal.Views.IndividualQuestionGenerator"
+        x:Class="ActualSchoolInternal.Views.IndividualQuestionGeneratorView"
         x:DataType="viewModels:IndividualQuestionGeneratorViewModel">
 
     <Design.DataContext>
@@ -32,10 +32,14 @@
                 
                 <!--Type of question radio button-->
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
-                    <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Logarithm}"/>
-                    <RadioButton GroupName="TypeOfQuestion" Content="Exponential"  Classes="RadioButtonBorderBlack" IsChecked="{Binding  Exponential}"/>
-                    <RadioButton GroupName="TypeOfQuestion" Content="Quadratic" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Quadratic}"/>
-                    <RadioButton GroupName="TypeOfQuestion" Content="Linear" Classes="RadioButtonBorderBlack" IsChecked="{Binding  Linear}"/>
+                    <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" Classes="RadioButtonBorderBlack"
+                                 IsChecked="{Binding  Logarithm}" />
+                    <RadioButton GroupName="TypeOfQuestion" Content="Exponential" Classes="RadioButtonBorderBlack"
+                                 IsChecked="{Binding  Exponential}" />
+                    <RadioButton GroupName="TypeOfQuestion" Content="Quadratic" Classes="RadioButtonBorderBlack"
+                                 IsChecked="{Binding  Quadratic}" />
+                    <RadioButton GroupName="TypeOfQuestion" Content="Linear" Classes="RadioButtonBorderBlack"
+                                 IsChecked="{Binding  Linear}" />
                 </StackPanel>
                 
                 <!--Difficultly of question radio button-->

@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace ActualSchoolInternal.Views;
 
-public partial class RemoveFile : Window
+public partial class AddQuestionView : UserControl
 {
-	public RemoveFile()
+	public AddQuestionView()
 	{
 		InitializeComponent();
 	}

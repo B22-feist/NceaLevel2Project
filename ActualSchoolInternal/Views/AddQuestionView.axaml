@@ -1,0 +1,51 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:ActualSchoolInternal.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ActualSchoolInternal.Views.AddQuestionView"
+             x:DataType="viewModel:AddQuestionViewModel"
+             x:CompileBindings="True">
+    <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="Auto,Auto,Auto" 
+          ColumnSpacing="5"
+          RowSpacing="5">
+        
+        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="10">
+            <TextBlock FontSize="35" Text="Add a Question"/>
+            <Border BorderThickness="1" BorderBrush="Black">
+                 <TextBox FontSize="20" Text="Add file path"/>
+            </Border>
+        </StackPanel>
+        
+        <TextBox Grid.Row="1" Grid.Column="0" Text="Add Answer file path"/>
+        
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <TextBlock Text="Type Of Question"/>
+            <RadioButton GroupName="TypeOfQuestion" Content="Logarithm" IsChecked="{Binding Logarithm}"/>
+            <RadioButton GroupName="TypeOfQuestion" Content="Exponential" IsChecked="{Binding Exponential}"/>
+            <RadioButton GroupName="TypeOfQuestion" Content="Quadratic" IsChecked="{Binding Quadratic}"/>
+            <RadioButton GroupName="TypeOfQuestion" Content="Linear" IsChecked="{Binding Linear}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Difficulty"/>
+            <RadioButton GroupName="Difficultly" Content="Exellence" IsChecked="{Binding  Excellence}"/>
+            <RadioButton GroupName="Difficultly" Content="Merit" IsChecked="{Binding Merit}"/>
+            <RadioButton GroupName="Difficultly" Content="Achieved" IsChecked="{Binding Achieved}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <TextBlock Text="Operation"/>
+            <RadioButton GroupName="Operation" Content="Simplify" IsChecked="{Binding Simplify}"/>
+            <RadioButton GroupName="Operation" Content="Expand" IsChecked="{Binding Expand}"/>
+            <RadioButton GroupName="Operation" Content="Factorise" IsChecked="{Binding Factorise}"/>
+            <RadioButton GroupName="Operation" Content="Solve" IsChecked="{Binding Solve}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="2" Grid.Row="1">
+            <TextBlock Text="Tutorial Link"/>
+            <TextBox Watermark="Tutorial Url"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

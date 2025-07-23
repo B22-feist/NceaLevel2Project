@@ -4,9 +4,9 @@ using Avalonia.Interactivity;
 
 namespace ActualSchoolInternal.Views;
 
-public partial class IndividualQuestionGenerator : Window
+public partial class IndividualQuestionGeneratorView : UserControl
 {
-	public IndividualQuestionGenerator()
+	public IndividualQuestionGeneratorView()
 	{
 		InitializeComponent();
 	}
