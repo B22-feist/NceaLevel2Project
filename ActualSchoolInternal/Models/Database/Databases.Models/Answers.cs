@@ -15,5 +15,7 @@ public class Answers
 	[MaxLength(200)]
 	public required string Name { get; init; }
 	
-	public required Questions Questions { get; init; }
+	public int QuestionId { get; init; }
+	
+	public Questions Question { get; init; }
 }

@@ -22,5 +22,5 @@ public class Questions
 	[MaxLength(100)] 
 	public string? TutorialUrl { get; set; }
 
-	public required ICollection<Answers> Answers { get; set; }
+	public Answers Answer { get; set; }
 }

@@ -39,29 +39,31 @@ public class QuestionContext : DbContext
 		 as well as id as a key*/
 		modelBuilder.Entity<Questions>(entity =>
 		{
+			entity.Property(e => e.Id).ValueGeneratedOnAdd();
+			
 			entity.Property(e => e.Operation).IsRequired();
 
 			entity.Property(e => e.Location).IsRequired();
 
 			entity.Property(e => e.Difficulty).IsRequired();
 
-			entity.HasKey(e => e.Id).HasName("ID");
+			entity.HasOne(q => q.Answer)
+				.WithOne(q => q.Question)
+				.HasForeignKey<Answers>(q => q.QuestionId)
+				.IsRequired();
 		});
 
 		/*set location to be required, sets up the id and
-		 sets the primary key of questions table to be the 
+		 sets the primary key of questions tables to be the 
 		 foreign key of answers*/
 		modelBuilder.Entity<Answers>(entity =>
 		{
-			entity.Property(e => e.LocationOfFile).IsRequired();
+			entity.Property(e => e.LocationOfFile)
+				.IsRequired();
 
-			entity.HasKey(e => e.Id);
-			
-			entity.HasOne(q => q.Questions)
-				.WithMany(a => a.Answers)
-				.HasForeignKey(q => q.Id)
-				.OnDelete(DeleteBehavior.ClientSetNull)
-				.HasConstraintName("FK_answers");
+			entity.Property(e => e.Id)
+				.ValueGeneratedOnAdd();
+
 		});
 	}
 }
