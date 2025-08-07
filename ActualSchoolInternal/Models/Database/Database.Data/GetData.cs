@@ -10,7 +10,7 @@ public class GetData
 	/*This method is used to get the questions from the database
 	 depending on the difficultly, operation, type of question(i.e. quadratic, linear)
 	 Current question is used to make sure that the same setting don't generate the same answer*/
-	public static string DataBaseOutput(string? difficultly, string? operation, string? typeOfQuestion, string? currentQuestion)
+	public static string DataBaseOutput(string? difficultly, string? equations, string? operation, string? currentQuestion)
 	{
 		using QuestionContext context = new();
 
@@ -19,24 +19,24 @@ public class GetData
 		/*This switch block performs a query based on if
 		 difficultly, operating or type of question are null
 		 and puts the return value into database output*/
-		if (difficultly != "" && typeOfQuestion != "" && operation != "")
+		if (difficultly != "" && operation != "" && equations != "")
 		{
 			if (context.Questions != null)
 				databaseOutput = context.Questions
 					.Where(q => q.Difficulty == difficultly)
 					.Where(q => q.Operation == operation)
-					.Where(q => q.TypeOfQuestion == typeOfQuestion);
+					.Where(q => q.TypeOfQuestion == equations);
 		}
 		
-		else if (difficultly != "" && typeOfQuestion != "" && operation == "")
+		else if (difficultly != "" && operation != "" && equations == "")
 		{
 			if (context.Questions != null)
 				databaseOutput = context.Questions
 					.Where(q => q.Difficulty == difficultly)
-					.Where(q => q.TypeOfQuestion == typeOfQuestion);
+					.Where(q => q.TypeOfQuestion == equations);
 		}
 		
-		else if (difficultly != "" && typeOfQuestion == "" && operation != "")
+		else if (difficultly != "" && operation == "" && equations != "")
 		{
 			if (context.Questions != null)
 				databaseOutput = context.Questions
@@ -44,21 +44,21 @@ public class GetData
 					.Where(q => q.Operation == operation);
 		}
 
-		else if (difficultly == "" && typeOfQuestion != "" && operation != "")
+		else if (difficultly == "" && operation != "" && equations != "")
 		{
 			if (context.Questions != null)
 				databaseOutput = context.Questions
-					.Where(q => q.TypeOfQuestion == typeOfQuestion);
+					.Where(q => q.TypeOfQuestion == equations);
 		}
 		
-		else if (difficultly == "" && typeOfQuestion == "" && operation != "")
+		else if (difficultly == "" && operation == "" && equations != "")
 		{
 			if (context.Questions != null)
 				databaseOutput = context.Questions
 					.Where(q => q.Operation == operation);
 		}
 
-		else if (difficultly != "" && typeOfQuestion == "" && operation == "")
+		else if (difficultly != "" && operation == "" && equations == "")
 		{
 			if (context.Questions != null)
 				databaseOutput = context.Questions

@@ -7,20 +7,20 @@ public class Questions
 	public int Id { get; set; }
 	
 	[MaxLength(100)]
-	public required string Operation { get; set; }
+	public required string Operation { get; init; }
 	
 	[MaxLength(100)]
-	public required string Difficulty  { get; set; }
+	public required string Difficulty  { get; init; }
 	[MaxLength(100)]
-	public required string Location  { get; set; }
+	public required string Location  { get; init; }
 	[MaxLength(100)]
-	public required string TypeOfQuestion { get; set; }
+	public required string TypeOfQuestion { get; init; }
 	
 	[MaxLength(100)]
-	public required string Name { get; set; }
+	public required string Name { get; init; }
 
 	[MaxLength(100)] 
-	public string? TutorialUrl { get; set; }
+	public string? TutorialUrl { get; init; }
 
 	public Answers Answer { get; set; }
 }

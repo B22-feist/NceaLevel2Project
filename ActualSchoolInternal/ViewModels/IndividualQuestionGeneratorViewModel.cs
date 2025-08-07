@@ -61,7 +61,6 @@ public class IndividualQuestionGeneratorViewModel : PageViewModelBase
 		QuestionGenerateCommand = ReactiveCommand.Create(QuestionGenerator);
 		
 		DisplayAnswerCommand = ReactiveCommand.Create(DisplayAnswer);
-		
 	}
 	
 	/*Buttons command bindings*/
@@ -73,8 +72,8 @@ public class IndividualQuestionGeneratorViewModel : PageViewModelBase
 	{
 		/*Set current string path to a question, can be Questions don't match settings*/
 		CurrentStringPath  = GetData.DataBaseOutput(QuestionGeneratorSettings.QuestionDifficultly(Achieved, Merit, Excellence),
-			QuestionGeneratorSettings.Operation(Logarithm, Exponential, Quadratic, Linear),
-			QuestionGeneratorSettings.TypeOfQuestion(Simplify, Expand, Factorise, Solve), CurrentStringPath);
+			QuestionGeneratorSettings.Equation(Logarithm, Exponential, Quadratic, Linear),
+			QuestionGeneratorSettings.Operation(Simplify, Expand, Factorise, Solve), CurrentStringPath);
 
 		/*Checks if the current string path is No questions match your settings*/
 		if (CurrentStringPath == (GetFolderPath.FolderPath() + "ActualSchoolInternal/Assets/NoQuestionsMatchYourSettings.png"))

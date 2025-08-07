@@ -13,7 +13,7 @@ public static class QuestionGeneratorSettings
 		return string.Empty;
 	}
 
-	public static string Operation(bool log, bool exponential, bool quadratic, bool linear)
+	public static string Equation(bool log, bool exponential, bool quadratic, bool linear)
 	{
 		if (exponential) return "Exponential";
 
@@ -26,7 +26,7 @@ public static class QuestionGeneratorSettings
 		return string.Empty;
 	}
 
-	public static string TypeOfQuestion(bool simplify, bool expand, bool factorise, bool solve)
+	public static string Operation(bool simplify, bool expand, bool factorise, bool solve)
 	{
 		if (solve) return "Solve";
 		
